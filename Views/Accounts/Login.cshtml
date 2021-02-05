@@ -1,0 +1,39 @@
+﻿@model Bookcase.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="text-center">
+    <h1 class="font-weight-bolder">Log In</h1>
+</div>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-4 mt-5 border rounded p-4 box-shadow" style="background-color: #FAFAFA">
+        <form asp-action="Login" asp-controller="Accounts" method="post">
+            <div asp-validation-summary="ModelOnly" class="table-primary"></div>
+
+            <div class="form-group">
+                <img src="~/svg/person-fill.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Username" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <img src="~/svg/vpn_key-24px.svg" width="30" height="30" class="d-inline-block align-top " alt="">
+                <label asp-for="Password" class="control-label font"></label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="btn-group d-flex">
+                <button type="submit" class="btn btn-primary font-weight-bold ">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

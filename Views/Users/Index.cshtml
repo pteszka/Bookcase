@@ -1,0 +1,80 @@
+﻿@model PaginatedList<AppUser>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="container">
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Role</th>
+                <th scope="col">Delete User</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+
+                    </td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" value="@item.Id" name="id" />
+                            <input type="submit" asp-action="Delete" data asp-route-id="@item.Id" value="-" class="btn btn-outline-danger" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @await Html.PartialAsync("../_PaginationPartialView", Model)
+</div>
+
+
+<!--<form asp-controller="Users" asp-action="Edit" method="post">
+    <check-group>
+        <check user-role="item.Role" check-role="Admin" id="item.Id" />
+        <check-label user-role-name="Admin"></check-label>
+        <div class="form-group">
+            <input type="submit" class="btn btn-outline-info" />
+        </div>
+    </check-group>
+    <check-group>
+        <check user-role="item.Role" check-role="Member" id="item.Id" />
+        <check-label user-role-name="Member"></check-label>
+        <div class="form-group">
+            <input type="submit" class="btn btn-outline-info" />
+        </div>
+    </check-group>
+</form>-->
+<!--<form asp-controller="Users" asp-action="Edit" method="post">
+    <check-group>
+        <check user-role="item.Role" check-role="Admin" id="item.Id" />
+        <check-label user-role-name="Admin"></check-label>
+        <div class="form-group">
+            <input type="submit" class="btn btn-outline-info" />
+        </div>
+    </check-group>
+    <check-group>
+        <check user-role="item.Role" check-role="Member" id="item.Id" />
+        <check-label user-role-name="Member"></check-label>
+        <div class="form-group">
+            <input type="submit" class="btn btn-outline-info" />
+        </div>
+    </check-group>-->
+@*                            <button type="submit" class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.Id" asp-route-role="@ViewData["role"]">Edit</button>
+*@
+<!--</form>-->
